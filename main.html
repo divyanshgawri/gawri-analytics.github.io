@@ -1,0 +1,644 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Syne:wght@400;500;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --sp-bg: #0a0c10;
+    --sp-surface: #111318;
+    --sp-surface2: #181c24;
+    --sp-border: rgba(255,255,255,0.07);
+    --sp-border2: rgba(255,255,255,0.13);
+    --sp-accent: #7f77dd;
+    --sp-accent2: #1d9e75;
+    --sp-accent3: #ef9f27;
+    --sp-red: #e24b4a;
+    --sp-text: #e8e6f0;
+    --sp-muted: #888798;
+    --sp-dim: #444455;
+    --sp-mono: 'JetBrains Mono', monospace;
+    --sp-head: 'Syne', sans-serif;
+    --sp-body: 'DM Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body, .readme-root {
+    background: var(--sp-bg);
+    color: var(--sp-text);
+    font-family: var(--sp-body);
+    font-size: 15px;
+    line-height: 1.7;
+    width: 100%;
+  }
+
+  .readme-root { padding: 0; }
+
+  /* HERO */
+  .hero {
+    padding: 64px 40px 48px;
+    border-bottom: 1px solid var(--sp-border);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--sp-border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--sp-border) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+  }
+  .hero-glow {
+    position: absolute;
+    top: -80px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(127,119,221,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; text-align: center; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(127,119,221,0.12);
+    border: 1px solid rgba(127,119,221,0.3);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-size: 12px; font-weight: 500; font-family: var(--sp-mono);
+    color: #afa9ec; letter-spacing: 0.04em;
+    margin-bottom: 24px;
+  }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #5dcaa5; }
+
+  .hero h1 {
+    font-family: var(--sp-head);
+    font-size: 54px; font-weight: 800;
+    line-height: 1.05; letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #fff 0%, #afa9ec 60%, #5dcaa5 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 13px; font-family: var(--sp-mono);
+    color: var(--sp-muted); margin-bottom: 20px;
+    letter-spacing: 0.05em;
+  }
+  .hero p {
+    font-size: 16px; color: rgba(232,230,240,0.7);
+    max-width: 520px; margin: 0 auto 32px; line-height: 1.75;
+  }
+
+  .badge-row {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 0;
+  }
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    border-radius: 6px; padding: 4px 10px;
+    font-size: 12px; font-family: var(--sp-mono); font-weight: 500;
+  }
+  .badge-purple { background: rgba(127,119,221,0.15); color: #afa9ec; border: 1px solid rgba(127,119,221,0.25); }
+  .badge-teal { background: rgba(29,158,117,0.15); color: #5dcaa5; border: 1px solid rgba(29,158,117,0.25); }
+  .badge-amber { background: rgba(239,159,39,0.15); color: #fac775; border: 1px solid rgba(239,159,39,0.25); }
+  .badge-gray { background: rgba(255,255,255,0.07); color: var(--sp-muted); border: 1px solid var(--sp-border2); }
+
+  /* SECTIONS */
+  .section { padding: 48px 40px; border-bottom: 1px solid var(--sp-border); }
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-family: var(--sp-mono); font-size: 11px; font-weight: 500;
+    color: var(--sp-accent); letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::before { content: '//'; color: var(--sp-dim); }
+
+  .section-title {
+    font-family: var(--sp-head); font-size: 28px; font-weight: 700;
+    color: #fff; line-height: 1.2; margin-bottom: 20px;
+  }
+  .section-body { color: rgba(232,230,240,0.72); max-width: 680px; line-height: 1.8; }
+
+  /* STATS ROW */
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--sp-border);
+    border: 1px solid var(--sp-border); border-radius: 12px; overflow: hidden;
+    margin: 32px 0;
+  }
+  .stat-cell {
+    background: var(--sp-surface);
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--sp-head); font-size: 36px; font-weight: 800;
+    line-height: 1; margin-bottom: 6px;
+  }
+  .stat-num.purple { color: #7f77dd; }
+  .stat-num.teal { color: #1d9e75; }
+  .stat-num.amber { color: #ef9f27; }
+  .stat-num.red { color: #e24b4a; }
+  .stat-label { font-size: 12px; color: var(--sp-muted); font-family: var(--sp-mono); letter-spacing: 0.04em; }
+
+  /* FEATURE CARDS */
+  .features-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px; margin-top: 28px;
+  }
+  .feat-card {
+    background: var(--sp-surface);
+    border: 1px solid var(--sp-border);
+    border-radius: 12px; padding: 24px;
+    transition: border-color 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .feat-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+  }
+  .feat-card.purple::before { background: linear-gradient(90deg, transparent, #7f77dd, transparent); }
+  .feat-card.teal::before { background: linear-gradient(90deg, transparent, #1d9e75, transparent); }
+  .feat-card.amber::before { background: linear-gradient(90deg, transparent, #ef9f27, transparent); }
+  .feat-card.red::before { background: linear-gradient(90deg, transparent, #e24b4a, transparent); }
+
+  .feat-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; margin-bottom: 14px;
+  }
+  .feat-icon.purple { background: rgba(127,119,221,0.15); }
+  .feat-icon.teal { background: rgba(29,158,117,0.15); }
+  .feat-icon.amber { background: rgba(239,159,39,0.15); }
+  .feat-icon.red { background: rgba(226,75,74,0.15); }
+
+  .feat-title {
+    font-family: var(--sp-head); font-size: 15px; font-weight: 700;
+    color: #fff; margin-bottom: 8px;
+  }
+  .feat-desc { font-size: 13px; color: var(--sp-muted); line-height: 1.7; }
+
+  /* PIPELINE */
+  .pipeline { margin-top: 28px; }
+  .pipe-step {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 18px 0; border-bottom: 1px solid var(--sp-border);
+  }
+  .pipe-step:last-child { border-bottom: none; }
+  .pipe-num {
+    font-family: var(--sp-mono); font-size: 11px; font-weight: 500;
+    color: var(--sp-accent); min-width: 28px; padding-top: 2px;
+  }
+  .pipe-name {
+    font-family: var(--sp-head); font-size: 15px; font-weight: 700;
+    color: #fff; margin-bottom: 4px;
+  }
+  .pipe-desc { font-size: 13px; color: var(--sp-muted); line-height: 1.6; }
+  .pipe-tag {
+    display: inline-flex; font-size: 10px; font-family: var(--sp-mono);
+    background: rgba(127,119,221,0.12); color: #afa9ec;
+    border: 1px solid rgba(127,119,221,0.2);
+    border-radius: 4px; padding: 2px 7px; margin-top: 6px;
+  }
+
+  /* ALGO BLOCK */
+  .algo-block {
+    background: var(--sp-surface);
+    border: 1px solid var(--sp-border);
+    border-radius: 12px; overflow: hidden; margin-top: 28px;
+  }
+  .algo-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px; border-bottom: 1px solid var(--sp-border);
+    background: var(--sp-surface2);
+  }
+  .algo-title { font-family: var(--sp-mono); font-size: 12px; color: var(--sp-muted); }
+  .algo-dots { display: flex; gap: 6px; }
+  .algo-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .algo-body { padding: 20px; font-family: var(--sp-mono); font-size: 12.5px; line-height: 2; color: #b0aec8; }
+  .algo-kw { color: #7f77dd; }
+  .algo-fn { color: #5dcaa5; }
+  .algo-str { color: #fac775; }
+  .algo-cmt { color: #444455; }
+  .algo-num { color: #ef9f27; }
+
+  /* PERF TABLE */
+  .perf-table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+  .perf-table th {
+    font-family: var(--sp-mono); font-size: 11px; font-weight: 500;
+    color: var(--sp-muted); text-transform: uppercase; letter-spacing: 0.07em;
+    padding: 10px 16px; border-bottom: 1px solid var(--sp-border);
+    text-align: left;
+  }
+  .perf-table td { padding: 13px 16px; border-bottom: 1px solid var(--sp-border); font-size: 13px; }
+  .perf-table tr:last-child td { border-bottom: none; }
+  .perf-table .highlight td { background: rgba(127,119,221,0.06); }
+  .val-good { color: #5dcaa5; font-family: var(--sp-mono); font-weight: 500; }
+  .val-warn { color: #fac775; font-family: var(--sp-mono); }
+  .val-bad { color: #e24b4a; font-family: var(--sp-mono); }
+  .system-name { font-weight: 500; color: #fff; }
+  .you-badge {
+    font-size: 10px; font-family: var(--sp-mono);
+    background: rgba(127,119,221,0.2); color: #afa9ec;
+    border-radius: 4px; padding: 2px 6px; margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* BAR CHART */
+  .chart-container { margin: 28px 0; }
+  .chart-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .chart-label { font-size: 12px; color: var(--sp-muted); font-family: var(--sp-mono); min-width: 90px; text-align: right; }
+  .chart-bar-wrap { flex: 1; background: var(--sp-surface2); border-radius: 4px; height: 28px; overflow: hidden; position: relative; }
+  .chart-bar { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-family: var(--sp-mono); font-weight: 500; }
+  .chart-bar.b-us { background: rgba(127,119,221,0.4); color: #afa9ec; width: 23.7%; }
+  .chart-bar.b-lida { background: rgba(226,75,74,0.3); color: #f09595; width: 100%; }
+  .chart-bar.b-l4d { background: rgba(239,159,39,0.3); color: #fac775; width: 69.1%; }
+
+  /* GUARDRAIL */
+  .guard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+  .guard-item {
+    background: var(--sp-surface); border: 1px solid var(--sp-border);
+    border-radius: 10px; padding: 16px 18px;
+  }
+  .guard-label { font-size: 12px; font-family: var(--sp-mono); color: var(--sp-muted); margin-bottom: 6px; }
+  .forbidden-tokens { display: flex; flex-wrap: wrap; gap: 6px; }
+  .token-pill {
+    font-family: var(--sp-mono); font-size: 11px;
+    background: rgba(226,75,74,0.12); color: #f09595;
+    border: 1px solid rgba(226,75,74,0.2);
+    border-radius: 4px; padding: 3px 8px;
+  }
+  .allowed-token {
+    font-family: var(--sp-mono); font-size: 11px;
+    background: rgba(29,158,117,0.12); color: #5dcaa5;
+    border: 1px solid rgba(29,158,117,0.2);
+    border-radius: 4px; padding: 3px 8px;
+  }
+  .namespace-eq { font-family: var(--sp-mono); font-size: 13px; color: var(--sp-text); line-height: 2; }
+  .ns-var { color: #7f77dd; }
+  .ns-op { color: var(--sp-muted); }
+  .ns-val { color: #5dcaa5; }
+
+  /* FOOTER */
+  .readme-footer {
+    padding: 40px; background: var(--sp-surface);
+    border-top: 1px solid var(--sp-border);
+  }
+  .footer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+  .footer-section-title {
+    font-family: var(--sp-mono); font-size: 11px; font-weight: 500;
+    color: var(--sp-muted); text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 12px;
+  }
+  .footer-text { font-size: 13px; color: rgba(232,230,240,0.55); line-height: 1.7; }
+  .footer-link { color: #7f77dd; cursor: pointer; text-decoration: underline; text-decoration-color: rgba(127,119,221,0.3); }
+  .footer-divider { border: none; border-top: 1px solid var(--sp-border); margin-bottom: 20px; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-size: 12px; color: var(--sp-dim); font-family: var(--sp-mono); }
+  .footer-ack { font-size: 12px; color: var(--sp-muted); }
+
+  /* LICENSE WARNING */
+  .license-warn {
+    background: rgba(226,75,74,0.07);
+    border: 1px solid rgba(226,75,74,0.2);
+    border-radius: 10px; padding: 18px 20px; margin-top: 24px;
+  }
+  .license-warn-title {
+    font-family: var(--sp-mono); font-size: 12px; font-weight: 500;
+    color: #e24b4a; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .warn-icon { width: 14px; height: 14px; border: 1.5px solid #e24b4a; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 9px; color: #e24b4a; font-weight: 700; }
+  .license-list { list-style: none; }
+  .license-list li { font-size: 13px; color: rgba(232,230,240,0.6); padding: 4px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .license-list li::before { content: '—'; color: #e24b4a; flex-shrink: 0; }
+</style>
+
+<div class="readme-root">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-badge"><span class="badge-dot"></span>research paper · GNDU · 2026</div>
+      <h1>Gawri<br> Analytics</h1>
+      <p class="hero-sub">DIVYANSH GAWRI <br> DEPT. OF COMPUTATIONAL STATISTICS &amp; DATA ANALYTICS</p>
+      <p>A plan-first, agentic framework for automated exploratory data analysis — deterministic, safe, and production-ready. Schema-driven dashboards at 2.06s latency.</p>
+      <a href="https://github.com/divyanshgawri/Analytics" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:100px;padding:8px 18px;font-size:13px;color:#e8e6f0;text-decoration:none;font-family:'JetBrains Mono',monospace;margin-bottom:20px;">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+  View on GitHub
+</a>
+      <div class="badge-row">        
+        <span class="badge badge-purple">LLM orchestration</span>
+        <span class="badge badge-teal">92% ESR</span>
+        <span class="badge badge-amber">4.2× faster than LLM4Dash</span>
+        <span class="badge badge-gray">Llama-3.3-70B</span>
+        <span class="badge badge-gray">Streamlit</span>
+        <span class="badge badge-gray">Python</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="section">
+    <div class="section-label">at a glance</div>
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <div class="stat-num purple">92%</div>
+        <div class="stat-label">Execution Success Rate</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num teal">2.06s</div>
+        <div class="stat-label">Avg. end-to-end latency</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num amber">100%</div>
+        <div class="stat-label">Adversarial refusal rate</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num red">4.7/5</div>
+        <div class="stat-label">User clarity rating</div>
+      </div>
+    </div>
+
+    <p class="section-body">
+      Specter Analytics bridges the gap between unreliable generative LLM pipelines and deterministic production analytics. Instead of converting natural language queries directly into runnable code, it decouples <em>analytical reasoning</em> from <em>code execution</em> — ensuring every dashboard is structurally validated before a single line runs.
+    </p>
+  </div>
+
+  <!-- PROBLEM -->
+  <div class="section">
+    <div class="section-label">motivation</div>
+    <div class="section-title">Why existing systems fall short</div>
+    <p class="section-body">
+      Current text-to-code analytics systems suffer from three compounding problems: hallucinated schemas, stochastic outputs, and unconstrained execution. LLM4Dash's accuracy drops to 76% on complex multi-variable queries. LIDA's latency reaches 12.3s. Neither provides meaningful security isolation during code execution.
+    </p>
+    <div class="features-grid" style="margin-top: 20px;">
+      <div class="feat-card purple">
+        <div class="feat-icon purple">⚡</div>
+        <div class="feat-title">Hallucinated schemas</div>
+        <div class="feat-desc">Raw tabular data passed to LLMs causes column confusion, type mismatches, and fabricated aggregations. Specter never sends raw data — only a validated semantic profile.</div>
+      </div>
+      <div class="feat-card amber">
+        <div class="feat-icon amber">⏱</div>
+        <div class="feat-title">Prohibitive latency</div>
+        <div class="feat-desc">Fully generative pipelines that route every query through an LLM incur 8–14s latency — unusable for real-time business intelligence workloads.</div>
+      </div>
+      <div class="feat-card red">
+        <div class="feat-icon red">🛡</div>
+        <div class="feat-title">Unsafe execution</div>
+        <div class="feat-desc">Generated code with unrestricted filesystem, network, or OS access creates serious attack surfaces in multi-tenant analytics environments.</div>
+      </div>
+      <div class="feat-card teal">
+        <div class="feat-icon teal">📊</div>
+        <div class="feat-title">Inconsistent outputs</div>
+        <div class="feat-desc">Stochastic LLM reasoning at non-zero temperature produces different visualizations for identical queries — an unacceptable property for production BI.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARCHITECTURE -->
+  <div class="section">
+    <div class="section-label">system design</div>
+    <div class="section-title">Four-stage RAG pipeline</div>
+    <p class="section-body">The framework operates as a Directed Acyclic Graph with four specialized agents. Each stage has a clear contract and failure mode — no stage can corrupt the output of another.</p>
+
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="pipe-num">01</div>
+        <div>
+          <div class="pipe-name">Schema-Based Inference</div>
+          <div class="pipe-desc">Converts your dataset into a lightweight metadata profile — the LLM never sees raw data, eliminating hallucinated columns and type errors entirely.</div>
+          <div class="pipe-tag">O(n·m) profiling · zero hallucination risk</div>
+        </div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">02</div>
+        <div>
+          <div class="pipe-name">Hybrid Intent Routing (HIR)</div>
+          <div class="pipe-desc">Classifies your query using fast keyword matching before falling back to LLM classification — keeping latency low for the vast majority of queries.</div>
+          <div class="pipe-tag">deterministic heuristics · LLM fallback · O(n)</div>
+        </div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">03</div>
+        <div>
+          <div class="pipe-name">Architect–Analyst Decoupling</div>
+          <div class="pipe-desc">Plans the full dashboard structure first and validates it, then generates code. Reasoning is always inspectable before a single line executes.</div>
+          <div class="pipe-tag">plan → validate → synthesize · Llama-3.3-70B</div>
+        </div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">04</div>
+        <div>
+          <div class="pipe-name">Runtime Guardrails</div>
+        <div class="pipe-desc">All generated code runs in a sandboxed namespace. Dangerous tokens trigger immediate rejection — no filesystem, network, or OS access is ever permitted.</div>
+          <div class="pipe-tag">static analysis · sandboxed exec · immutable data</div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- 
+  ALGO
+  <div class="section">
+    <div class="section-label">core algorithm</div>
+    <div class="section-title">Hybrid Intent Routing</div>
+    <p class="section-body">The HIR algorithm prioritizes deterministic heuristics over costly LLM classification. Only queries that fail keyword matching are escalated to the language model — making the effective routing complexity O(n) for the vast majority of production traffic.</p>
+
+    <div class="algo-block">
+      <div class="algo-header">
+        <span class="algo-title">Algorithm 1 — Hybrid Intent Routing (HIR)</span>
+        <div class="algo-dots">
+          <div class="algo-dot" style="background:#e24b4a"></div>
+          <div class="algo-dot" style="background:#ef9f27"></div>
+          <div class="algo-dot" style="background:#1d9e75"></div>
+        </div>
+      </div>
+      <div class="algo-body">
+        <span class="algo-cmt">// Input: User query Q; keyword sets Kvis, Knum, Kgreet</span><br>
+        <span class="algo-cmt">// Output: Intent I ∈ { Visual, Analytic, Greeting }</span><br><br>
+        <span class="algo-num">1</span>  q ← <span class="algo-fn">Preprocess</span>(Q)<br>
+        <span class="algo-num">2</span>  <span class="algo-kw">if</span> ∃ω ∈ K<sub>vis</sub> : ω ∈ <span class="algo-fn">Substr</span>(q) <span class="algo-kw">then</span><br>
+        <span class="algo-num">3</span>  &nbsp;&nbsp;<span class="algo-kw">return</span> <span class="algo-str">Visual</span><br>
+        <span class="algo-num">4</span>  <span class="algo-kw">else if</span> ∃ω ∈ K<sub>num</sub> : ω ∈ <span class="algo-fn">Substr</span>(q) <span class="algo-kw">then</span><br>
+        <span class="algo-num">5</span>  &nbsp;&nbsp;<span class="algo-kw">return</span> <span class="algo-str">Analytic</span><br>
+        <span class="algo-num">6</span>  <span class="algo-kw">else if</span> ∃ω ∈ K<sub>greet</sub> : q = ω <span class="algo-kw">then</span><br>
+        <span class="algo-num">7</span>  &nbsp;&nbsp;<span class="algo-kw">return</span> <span class="algo-str">Greeting</span><br>
+        <span class="algo-num">8</span>  I<sub>LLM</sub> ← <span class="algo-fn">LLM_Classify</span>(q) <span class="algo-cmt">// fallback only</span><br>
+        <span class="algo-num">9</span>  <span class="algo-kw">if</span> I<sub>LLM</sub> ∈ {<span class="algo-str">Visual</span>, <span class="algo-str">Analytic</span>, <span class="algo-str">Greeting</span>} <span class="algo-kw">then</span><br>
+        <span class="algo-num">10</span> &nbsp;&nbsp;<span class="algo-kw">return</span> I<sub>LLM</sub><br>
+        <span class="algo-num">11</span> <span class="algo-kw">return</span> <span class="algo-str">Analytic</span> <span class="algo-cmt">// safe default</span>
+      </div>
+    </div>
+  </div>
+
+  GUARDRAILS
+  <div class="section">
+    <div class="section-label">safety</div>
+    <div class="section-title">Runtime guardrails</div>
+    <p class="section-body">Every piece of synthesized code is double-gated: a static token inspection pass, then sandboxed execution in a restricted namespace. No exceptions — any violation immediately returns ∅.</p>
+
+    <div class="guard-grid">
+      <div class="guard-item">
+        <div class="guard-label">FORBIDDEN TOKEN SET F</div>
+        <div class="forbidden-tokens">
+          <span class="token-pill">os</span>
+          <span class="token-pill">sys</span>
+          <span class="token-pill">exec</span>
+          <span class="token-pill">eval</span>
+          <span class="token-pill">compile</span>
+          <span class="token-pill">open</span>
+          <span class="token-pill">subprocess</span>
+          <span class="token-pill">socket</span>
+          <span class="token-pill">importlib</span>
+          <span class="token-pill">__import__</span>
+        </div>
+      </div>
+      <div class="guard-item">
+        <div class="guard-label">ALLOWED EXECUTION NAMESPACE N</div>
+        <div class="forbidden-tokens">
+          <span class="allowed-token">pandas</span>
+          <span class="allowed-token">numpy</span>
+          <span class="allowed-token">builtins (whitelisted)</span>
+          <span class="allowed-token">D' (immutable copy)</span>
+        </div>
+      </div>
+      <div class="guard-item" style="grid-column: 1/-1;">
+        <div class="guard-label">FORMAL EXECUTION MODEL</div>
+        <div class="namespace-eq">
+          N = <span class="ns-var">B</span> <span class="ns-op">∪</span> <span class="ns-var">L</span> <span class="ns-op">∪</span> {<span class="ns-val">D'</span>} &nbsp;&nbsp;<span style="color:var(--sp-dim)">// B = builtins, L = authorized libs</span><br>
+          Execute(E, D) = <span class="ns-val">R</span> &nbsp;<span class="ns-op">if</span>&nbsp; Safe(E) = 1 ∧ T(E) ≤ τ<br>
+          Execute(E, D) = <span class="ns-op">∅</span> &nbsp;<span class="ns-op">otherwise</span>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- RESULTS -->
+  <div class="section">
+    <div class="section-label">evaluation</div>
+    <div class="section-title">Performance benchmarks</div>
+    <p class="section-body">Evaluated across 130 natural language queries spanning analytical (50), visualization (50), and adversarial (30) categories. Three datasets of varying scale were used: Sample Superstore (9,994 rows), E-commerce Behavior (100,000 rows), and Medical Insurance Costs (1,000 rows).</p>
+
+    <table class="perf-table">
+      <thead>
+        <tr>
+          <th>System</th>
+          <th>Avg. Latency</th>
+          <th>ESR / Accuracy</th>
+          <th>Complex queries</th>
+          <th>Adversarial</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td class="system-name">Specter Analytics <span class="you-badge">this work</span></td>
+          <td class="val-good">2.06s</td>
+          <td class="val-good">92%</td>
+          <td class="val-good">94% (analytic)</td>
+          <td class="val-good">100% refusal</td>
+        </tr>
+        <tr>
+          <td class="system-name">LLM4Dash</td>
+          <td class="val-warn">8.7s</td>
+          <td class="val-warn">85%</td>
+          <td class="val-warn">76%</td>
+          <td class="val-bad">partial execution</td>
+        </tr>
+        <tr>
+          <td class="system-name">LIDA</td>
+          <td class="val-bad">12.3s</td>
+          <td class="val-bad">qualitative only</td>
+          <td class="val-bad">not reported</td>
+          <td class="val-bad">not reported</td>
+        </tr>
+        <tr>
+          <td class="system-name">Chat2VIS</td>
+          <td style="color:var(--sp-muted); font-family:var(--sp-mono)">—</td>
+          <td class="val-bad">qualitative only</td>
+          <td class="val-bad">not reported</td>
+          <td class="val-bad">not reported</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-label" style="margin-top: 32px;">latency comparison</div>
+    <div class="chart-container">
+      <div class="chart-row">
+        <div class="chart-label">Specter</div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar b-us">2.06s</div>
+        </div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-label">LLM4Dash</div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar b-l4d">8.7s</div>
+        </div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-label">LIDA</div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar b-lida">12.3s</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:12px; color:var(--sp-muted); font-family:var(--sp-mono); margin-top:4px;">
+      Scalability: 1k rows → 0.8s · 10k rows → 2.01s · 100k rows → 5.4s (linear growth)
+    </p>
+  </div>
+
+  <!-- LICENSE -->
+  <div class="section">
+    <div class="section-label">legal</div>
+    <div class="section-title">Proprietary — pre-publication</div>
+    <p class="section-body">This codebase is confidential intellectual property. A strict moratorium is in place pending formal research publication.</p>
+    <div class="license-warn">
+      <div class="license-warn-title"><span class="warn-icon">!</span> IP PROTECTION NOTICE</div>
+      <ul class="license-list">
+        <li>No unauthorized use, execution, or deployment until research publication is finalized</li>
+        <li>No derivative works — reproduction or modification of the multi-agent pipeline or RAG logic is forbidden</li>
+        <li>No benchmarking without express written consent from the author</li>
+        <li>Violations will be treated as intellectual property theft</li>
+      </ul>
+      <p style="font-size:12px; color:var(--sp-muted); margin-top:12px; font-family:var(--sp-mono);">For collaboration or access inquiries → 2023010030913@gndu.ac.in</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="readme-footer">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-section-title">Author</div>
+        <div class="footer-text">
+          Divyansh Gawri<br>
+          Dept. of Computational Statistics &amp; Data Analytics<br>
+          Guru Nanak Dev University<br>
+          Amritsar, Punjab, India
+        </div>
+      </div>
+      <div>
+        <div class="footer-section-title">Supervisor</div>
+        <div class="footer-text">
+          Prof. Harkiran Kaur<br>
+          <span style="color:var(--sp-dim)">Invaluable guidance and constructive feedback throughout the development of this research.</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-section-title">Datasets used</div>
+        <div class="footer-text">
+          Sample Superstore (9,994 × 21)<br>
+          E-commerce Behavior (100k × 10)<br>
+          Medical Insurance Costs (1k × 7)<br>
+          <span style="color:var(--sp-dim)">All sourced from Kaggle</span>
+        </div>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Divyansh Gawri · All Rights Reserved</span>
+      <span class="footer-ack">GNDU · Amritsar, Punjab, India</span>
+    </div>
+  </div>
+
+</div>
